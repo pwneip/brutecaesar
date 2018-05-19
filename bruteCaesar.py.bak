@@ -4,26 +4,23 @@
 #author		:PwnEIP
 #email		:pwneip@gmail.com
 #date		:18 Oct 2017
-#updates        :
 #version	:1.0
 #usage		:bruteCaesar.py [-h] <string>
 #notes		:
-#python_version	:3
-#dependencies   :guess_language
+#python_version	:2.7.12
 #==============================================================================
 
 import sys, getopt, string
-from guess_language import guess_language
 
 def usage():
-	print("usage: bruteCaesar.py <string>")
-	print("\t -h, this menu")
+	print "usage: bruteCaesar.py <string>"
+	print "\t -h, this menu"
 	sys.exit(2)
 
 def caesar(plaintext, shift):
     alphabet = string.ascii_lowercase + string.ascii_uppercase
     shifted_alphabet = string.ascii_lowercase[shift:] + string.ascii_lowercase[:shift] + string.ascii_uppercase[shift:] + string.ascii_uppercase[:shift]
-    table = str.maketrans(alphabet, shifted_alphabet)
+    table = string.maketrans(alphabet, shifted_alphabet)
     return plaintext.translate(table)
 
 def main(argv):
@@ -37,12 +34,7 @@ def main(argv):
 			sys.exit()
 	if len(args) > 0:
 		for i in range(1,26):
-                    plaintext = caesar(' '.join(args), i)
-                    language = guess_language(plaintext)
-                    if language == "en":
-                        print("ROT:" + '{:2}'.format(i) + " " + plaintext + "<----english---") 
-                    else:
-                        print("ROT:" + '{:2}'.format(i) + " " + plaintext)
+			print caesar(' '.join(args), i)
 		sys.exit(0)
 	else:
 		usage()
